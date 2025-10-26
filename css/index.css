@@ -1,0 +1,113 @@
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+    font-family: monospace;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: red;
+    background-image: radial-gradient(circle, #c6a8a8, #75c775, #eed963);
+}
+
+.main {
+    gap: 10px;
+    margin: auto;
+    height: 80vh;
+    width: 70%;
+    background-color: #04ffff;
+    background-image: linear-gradient(to right, #fbff8f, #b1e18b);
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 10px 0px 10px 0px;
+    align-items: center;
+}
+
+.input {
+    width: 70%
+}
+
+input {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 70%;
+    height: 40px;
+    padding-left: 30px;
+}
+
+#add {
+    width: 28%;
+    color: gray;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    height: 40px;
+    text-align: center;
+    padding: 10px;
+    background-color: rgb(179, 231, 77);
+}
+
+table {
+    border-collapse: collapse;
+    width: 70%;
+}
+
+td,
+th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(odd) {
+    background-color: #fbeded;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #78c4a8;
+    color: white;
+}
+
+#edit {
+    background-color: blue;
+    background-image: linear-gradient(to right, #8fb6ff, #a0da72);
+    padding:2px;
+    height:30px;
+    width:60px;
+    border-radius:10px;
+    border: 1px solid #ddd;
+    color:white;
+}
+
+#delete {
+    background-color: blue;
+    background-image: linear-gradient(to right, #ecb8ca, #e65069);
+    padding:2px;
+    height:30px;
+    width:60px;
+    border-radius:10px;
+    border: 1px solid #ddd;
+    color:white;
+}
+
+#edit:hover {
+    background-image:#8fb6ff;
+}
+
+#delete:hover {
+    background-image:#e65069;
+}
