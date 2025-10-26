@@ -85,29 +85,21 @@ th {
 #edit {
     background-color: blue;
     background-image: linear-gradient(to right, #8fb6ff, #a0da72);
-    padding:2px;
-    height:30px;
-    width:60px;
-    border-radius:10px;
+    padding: 2px;
+    height: 30px;
+    width: 60px;
+    border-radius: 10px;
     border: 1px solid #ddd;
-    color:white;
+    color: white;
 }
 
 #delete {
     background-color: blue;
     background-image: linear-gradient(to right, #ecb8ca, #e65069);
-    padding:2px;
-    height:30px;
-    width:60px;
-    border-radius:10px;
+    padding: 2px;
+    height: 30px;
+    width: 60px;
+    border-radius: 10px;
     border: 1px solid #ddd;
-    color:white;
-}
-
-#edit:hover {
-    background-image:#8fb6ff;
-}
-
-#delete:hover {
-    background-image:#e65069;
+    color: white;
 }
