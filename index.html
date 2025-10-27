@@ -14,10 +14,16 @@
             <input type="text" placeholder="Add task" id="task">
     <button id="add">Add</button>
         </div>
+        <div class="filter">
+            <button onclick="filterTask('all')">All</button>
+            <button onclick="filterTask('completed')">Completed</button>
+            <button onclick="filterTask('cending')">Pending</button>
+        </div>
     <table>
         <thead>
             <tr>
                 <th></th>
+                <th>Status</th>
                 <th>Task Name</th>
                 <th>Edit</th>
                 <th>Delete</th>
