@@ -1,5 +1,5 @@
 let Todo = [];
-let filterType = "all"; 
+let filterType = "all";
 
 document.getElementById("add").addEventListener("click", () => {
   let task = document.getElementById("task").value.trim();
@@ -30,12 +30,16 @@ function display() {
             ${Todo[i].completed ? "checked" : ""} 
             onchange="toggleTask(${i})">
         </td>
-        <td style="text-decoration: ${
-          Todo[i].completed ? "line-through" : "none"
-        }; color: ${Todo[i].completed ? "#aaa" : "#000000ff"};">
-          ${Todo[i].name}
+        <td style="text-decoration: ${Todo[i].completed ? "line-through" : "none"
+      }; color: ${Todo[i].completed ? "#aaa" : "#000000ff"};">
+          
+          <span id="taskname${i}">${Todo[i].name}</span>
+          <input type="text" id="edittext${i}" value="${Todo[i].name}" style="display:none">
         </td>
-        <td><button id="edit" onclick="editTask(${i})">Edit</button></td>
+        <td>
+        <button id="edit${i}" class="edit" onclick="editTask(${i})">Edit</button>
+        <button style="display:none" id="save${i}" onclick="saveTask(${i})">Save</button>
+        </td>
         <td><button id="delete" onclick="deleteTask(${i})">Delete</button></td>
       </tr>
     `;
@@ -51,20 +55,30 @@ function toggleTask(index) {
 
 
 function editTask(index) {
-  let newTask = prompt("Edit task:", Todo[index].name);
-  if (newTask && newTask.trim() !== "") {
-    Todo[index].name = newTask.trim();
-    display();
+  let editText = document.getElementById(`edittext${index}`);
+  let saveButton = document.getElementById(`save${index}`);
+  let editButton = document.getElementById(`edit${index}`);
+  let taskname = document.getElementById(`taskname${index}`);
+  taskname.style.display = "none";
+  editText.style.display = "block";
+  editText.focus();
+  editButton.style.display = "none";
+  saveButton.style.display = "inline-block";
+}
+
+function saveTask(index) {
+
+  let editText = document.getElementById(`edittext${index}`);
+  let newText = editText.value.trim();
+  if(newText !== ""){
+    Todo[index].name=newText;
   }
+  display()
 }
 
 function deleteTask(index) {
   if (confirm(`Are you sure you want to delete "${Todo[index].name}"?`)) {
-    let newTodo = [];
-    for (let i = 0; i < Todo.length; i++) {
-      if (i !== index) newTodo.push(Todo[i]);
-    }
-    Todo = newTodo;
+    Todo = Todo.filter((_,i)=> i !==index)
     display();
   }
 }

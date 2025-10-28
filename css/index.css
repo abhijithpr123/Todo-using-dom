@@ -91,7 +91,7 @@ th {
     color: white;
 }
 
-#edit {
+.edit,#save {
     background-color: blue;
     background-image: linear-gradient(to right, #8fb6ff, #a0da72);
     padding: 2px;
