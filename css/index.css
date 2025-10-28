@@ -51,6 +51,15 @@ input {
     background-color: rgb(179, 231, 77);
 }
 
+.filter-button{
+    height: 30px;
+    width: 100px;
+    color: white;
+    border-radius: 50px;
+    background-color: #04ffff;
+    background-image: linear-gradient(to right, #3c3d3e, #8bd5e1);
+}
+
 table {
     border-collapse: collapse;
     width: 70%;

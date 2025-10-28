@@ -1,43 +1,82 @@
-let Todo=[];
+let Todo = [];
+let filterType = "all"; 
 
-document.getElementById("add").addEventListener('click',()=>{
-    let task = document.getElementById("task").value;
-    if(task=="")
-        return alert("Enter your task name")
-    Todo.push(task)
-    document.getElementById("task").value="";
-    display()
-})
+document.getElementById("add").addEventListener("click", () => {
+  let task = document.getElementById("task").value.trim();
 
-function display(){
-    let str =``;
-    for(const[index,task] of Todo.entries()){
-        str+= `
-        <tr>
-            <td>${index+1}</td>
-            <td><input type="checkbox" onChange="checkedTask(${index})" id="status-${index}"></td>
-            <td id="task-${index}">${task}</td>
-            <td><button id="edit">Edit</button></td>
-            <td><button id="delete" onclick="deleteTask(${index})">Delete</button></td>
-        </tr>
-        ` 
+  if (task === "") return alert("Enter your task name");
+
+  Todo.unshift({ name: task, completed: false });
+  document.getElementById("task").value = "";
+  display();
+});
+
+function display() {
+  let str = "";
+  for (let i = 0; i < Todo.length; i++) {
+
+    if (
+      (filterType === "completed" && !Todo[i].completed) ||
+      (filterType === "pending" && Todo[i].completed)
+    ) {
+      continue;
     }
-    document.getElementById("display").innerHTML=str
+
+    str += `
+      <tr>
+        <td>${i + 1}</td>
+        <td>
+          <input type="checkbox" 
+            ${Todo[i].completed ? "checked" : ""} 
+            onchange="toggleTask(${i})">
+        </td>
+        <td style="text-decoration: ${
+          Todo[i].completed ? "line-through" : "none"
+        }; color: ${Todo[i].completed ? "#aaa" : "#000000ff"};">
+          ${Todo[i].name}
+        </td>
+        <td><button id="edit" onclick="editTask(${i})">Edit</button></td>
+        <td><button id="delete" onclick="deleteTask(${i})">Delete</button></td>
+      </tr>
+    `;
+  }
+  document.getElementById("display").innerHTML = str;
 }
 
 
-function deleteTask(index){
-    let task = Todo[index];
-    if(confirm(`Are you sure "${index+1} ${task}" want to delete?`)){
-        // Todo.splice(index,1);
-        Todo=Todo.filter((task,i)=>i!==index)
-        display()
-    }
+function toggleTask(index) {
+  Todo[index].completed = !Todo[index].completed;
+  display();
 }
-function checkedTask(index) {
-    const checkbox = document.getElementById(`status-${index}`);
-    const taskText = document.getElementById(`task-${index}`);
-    
-    checkbox.checked? (taskText.style.cssText = "text-decoration: line-through; color: gray;") 
-    : (taskText.style.cssText = "text-decoration: none; color: black;");
+
+
+function editTask(index) {
+  let newTask = prompt("Edit task:", Todo[index].name);
+  if (newTask && newTask.trim() !== "") {
+    Todo[index].name = newTask.trim();
+    display();
+  }
+}
+
+function deleteTask(index) {
+  if (confirm(`Are you sure you want to delete "${Todo[index].name}"?`)) {
+    let newTodo = [];
+    for (let i = 0; i < Todo.length; i++) {
+      if (i !== index) newTodo.push(Todo[i]);
+    }
+    Todo = newTodo;
+    display();
+  }
+}
+
+
+let buttons = document.querySelectorAll(".filter button");
+
+for (let btn of buttons) {
+  btn.addEventListener("click", () => {
+    filterType = btn.textContent.toLowerCase();
+    for (let b of buttons) b.classList.remove("active");
+    btn.classList.add("active");
+    display();
+  });
 }
