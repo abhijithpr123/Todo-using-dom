@@ -38,7 +38,7 @@ function display() {
         </td>
         <td>
         <button id="edit${i}" class="edit" onclick="editTask(${i})">Edit</button>
-        <button style="display:none" id="save${i}" onclick="saveTask(${i})">Save</button>
+        <button style="display:none" class="save" id="save${i}" onclick="saveTask(${i})">Save</button>
         </td>
         <td><button id="delete" onclick="deleteTask(${i})">Delete</button></td>
       </tr>
@@ -70,15 +70,15 @@ function saveTask(index) {
 
   let editText = document.getElementById(`edittext${index}`);
   let newText = editText.value.trim();
-  if(newText !== ""){
-    Todo[index].name=newText;
+  if (newText !== "") {
+    Todo[index].name = newText;
   }
   display()
 }
 
 function deleteTask(index) {
   if (confirm(`Are you sure you want to delete "${Todo[index].name}"?`)) {
-    Todo = Todo.filter((_,i)=> i !==index)
+    Todo = Todo.filter((_, i) => i !== index)
     display();
   }
 }
